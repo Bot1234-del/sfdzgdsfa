@@ -6,6 +6,5 @@
   "repository": "https://github.com/YourUsername/SillyManga",
   "main": "index.js",
   "tags": ["image generation", "manga", "comfyui", "gemini"],
-  "dependencies": [],
-  "generate_interceptor": "onChat"
+  "dependencies": []
 }

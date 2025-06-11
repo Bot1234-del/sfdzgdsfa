@@ -46,7 +46,18 @@ async function imageUrlToBase64(url) {
 async function onExtensionReady() {
     console.log('SillyManga extension is ready!');
     sendSystemMessage('SillyManga extension loaded. Type /manga [prompt] to generate an image.');
-    // extensionSettings = getContext().extensionSettings; // Uncomment if using Sillytavern settings
+
+    // Get context and register event listener for MESSAGE_SENT
+    const context = getContext();
+    if (context && context.eventSource) {
+        context.eventSource.on('MESSAGE_SENT', onChat);
+        console.log('SillyManga: Registered onChat for MESSAGE_SENT event.');
+    } else {
+        console.warn('SillyManga: Could not access eventSource to register MESSAGE_SENT listener.');
+        sendSystemMessage('Warning: SillyManga could not fully initialize. Chat command might not work.');
+    }
+
+    // extensionSettings = context.extensionSettings; // Uncomment if using Sillytavern settings
     // [TODO] Add UI elements if necessary, e.g., a button in the extension tab
 }
 
